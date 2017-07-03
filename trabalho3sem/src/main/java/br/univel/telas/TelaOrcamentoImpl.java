@@ -67,22 +67,20 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 	private void configuraTabela() {
 		this.modeloOrcamento = new OrcamentoModel();
 		super.tableorcamento.setModel(modeloOrcamento);
-		if (super.tableorcamento.getModel().equals(modeloOrcamento)) {
-			super.tableorcamento.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
+		
+		super.tableorcamento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 
-					if (e.getClickCount() == 2) {
-						int idx = tableorcamento.getSelectedRow();
-						Orcamento o = modeloOrcamento.getLinhaOrcamento(idx);
-						preencherCampos(o);
-					}
-					super.mouseClicked(e);
+				if (e.getClickCount() == 2) {
+					int idx = tableorcamento.getSelectedRow();
+					Orcamento o = modeloOrcamento.getLinhaOrcamento(idx);
+					preencherCampos(o);
 				}
+				super.mouseClicked(e);
+			}
 
-			});
-		}
-
+		});
 	}
 
 	private void configuraBotoes() {
@@ -125,7 +123,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 				gravar();
 			}
 		});
-		
+
 		super.btnRemover.addActionListener(new ActionListener() {
 
 			@Override
@@ -133,7 +131,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 				remover();
 			}
 		});
-		
+
 		super.btnPdf.addActionListener(new ActionListener() {
 
 			@Override
@@ -144,12 +142,12 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 
 	}
 
-	
-
 	protected void pdf() {
 		GerarRelatorio2 gr2 = new GerarRelatorio2();
+		System.out.println(orcamentoselecionado.getCliente().getNome());
 		gr2.gerar(orcamentoselecionado, orcamentoselecionado.getProdutos());
-		
+		System.out.println(orcamentoselecionado.getCliente().getNome());
+
 	}
 
 	protected void buscaProduto() {
@@ -255,9 +253,9 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 		}
 		limparCamposProduto();
 	}
-	
+
 	protected void remover() {
-		if(super.tableorcamento.getModel().equals(modeloProduto)){
+		if (super.tableorcamento.getModel().equals(modeloProduto)) {
 			int idx = super.tableorcamento.getSelectedRow();
 			Produto p = this.listaproduto.get(idx);
 			this.listaproduto.remove(idx);

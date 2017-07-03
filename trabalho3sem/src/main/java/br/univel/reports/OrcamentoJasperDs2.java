@@ -22,7 +22,7 @@ public class OrcamentoJasperDs2 implements JRDataSource {
 	@Override
 	public Object getFieldValue(JRField field) throws JRException {
 		if ("Cliente".equals(field.getName())) {
-			return orc.getCliente();
+			return orc.getCliente().getNome();
 		}
 		if ("Validade".equals(field.getName())) {
 			return orc.getDataValidade();
