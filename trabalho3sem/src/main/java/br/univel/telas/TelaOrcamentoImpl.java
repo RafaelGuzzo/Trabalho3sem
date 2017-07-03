@@ -284,6 +284,8 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 		if (super.tableorcamento.getModel().equals(modeloProduto)) {
 			int idx = super.tableorcamento.getSelectedRow();
 			Produto p = this.listaproduto.get(idx);
+			total = total.subtract(p.getPreco());
+			super.lblvalortotal.setText(String.valueOf(total));
 			this.listaproduto.remove(idx);
 			alteraModeloTabel(listaproduto);
 		}
@@ -332,7 +334,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 			o.setData(dataAtual);
 			o.setCliente(clienteselecionado);
 			o.setProdutos(listaproduto);
-			// o.setValorTotal(valorTotal);
+			o.setValorTotal(total);
 
 			this.modeloOrcamento.adicionar(o);
 			listaOrcamento.add(o);
@@ -351,7 +353,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 			this.orcamentoselecionado.setData(dataAtual);
 			this.orcamentoselecionado.setCliente(clienteselecionado);
 			this.orcamentoselecionado.setProdutos(listaproduto);
-			// this.orcamentoselecionado.setValorTotal(valorTotal);
+			this.orcamentoselecionado.setValorTotal(total);
 
 			listaOrcamento.add(orcamentoselecionado);
 			this.modeloOrcamento.fireTableDataChanged();
@@ -390,7 +392,8 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 		super.txfDataVal.setText("");
 		super.txfClienteOrca.setText("");
 		super.lblAlerta.setText("");
-
+		super.lblvalortotal.setText("");
+		
 		super.btnExcluir.setEnabled(false);
 		super.txfClienteOrca.setEnabled(true);
 		super.txfDataVal.setEnabled(true);
