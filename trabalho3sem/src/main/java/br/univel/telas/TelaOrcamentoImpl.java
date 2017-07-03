@@ -23,6 +23,7 @@ import br.univel.model.ProdutoOrcaModel;
 import br.univel.pojo.Cliente;
 import br.univel.pojo.Orcamento;
 import br.univel.pojo.Produto;
+import br.univel.reports.GerarRelatorio2;
 import br.univel.telasbase.TelaOrcamentoBase;
 
 public class TelaOrcamentoImpl extends TelaOrcamentoBase {
@@ -132,10 +133,24 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 				remover();
 			}
 		});
+		
+		super.btnPdf.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pdf();
+			}
+		});
 
 	}
 
 	
+
+	protected void pdf() {
+		GerarRelatorio2 gr2 = new GerarRelatorio2();
+		gr2.gerar(orcamentoselecionado, orcamentoselecionado.getProdutos());
+		
+	}
 
 	protected void buscaProduto() {
 		GlassPaneController control = TelaController.getInstance().getController();
