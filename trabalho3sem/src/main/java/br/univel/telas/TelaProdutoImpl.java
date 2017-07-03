@@ -105,8 +105,6 @@ public class TelaProdutoImpl extends TelaProdutoBase {
 			@Override
 			public void accept(Produto t) {
 				telabusca.setVisible(false);
-				//dao.adicionarUm(t);
-				//modelo.preencherResultado(dao.getTodos());//gambs para atualizar table
 				preencherCampos(t);
 			}
 		});
@@ -139,7 +137,7 @@ public class TelaProdutoImpl extends TelaProdutoBase {
 
 	protected void excluir() {
 		this.modelo.remove(this.produtoselecionado);
-		//dao.exclui(this.produtoselecionado.getId());
+		dao.exclui(this.produtoselecionado.getId());
 		limparCampos();
 
 	}
@@ -173,9 +171,8 @@ public class TelaProdutoImpl extends TelaProdutoBase {
 			this.produtoselecionado.setDescricao(strDesc);
 			this.produtoselecionado.setPreco(bgvalor);
 			
-			//dao.atualiza(lgid, this.produtoselecionado);
-			//lblTotal.setText(dao.somaValor());
-			//this.modelo.preencherResultado(dao.getTodos());//tive que fazer essa bambis para atualizar
+			dao.atualiza(lgid, this.produtoselecionado);
+			
 			this.modelo.fireTableDataChanged();
 			limparCampos();
 			

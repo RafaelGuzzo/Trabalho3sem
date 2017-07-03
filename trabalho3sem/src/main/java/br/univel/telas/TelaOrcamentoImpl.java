@@ -53,7 +53,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 		super.txfClienteOrca.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_F2)
+				if (e.getKeyCode() == KeyEvent.VK_F2 || e.getKeyCode() == KeyEvent.VK_ENTER )
 					buscaCliente();
 			}
 		});
@@ -61,7 +61,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 		super.txfProduto.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_F3)
+				if (e.getKeyCode() == KeyEvent.VK_F3 || e.getKeyCode() == KeyEvent.VK_ENTER)
 					buscaProduto();
 			}
 		});

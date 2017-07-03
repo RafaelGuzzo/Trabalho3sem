@@ -90,8 +90,6 @@ public class TelaClienteImpl extends TelaClienteBase {
 			@Override
 			public void accept(Cliente t) {
 				telabusca.setVisible(false);
-				//dao.adicionar(t);
-				//modelo.preencherResultado(dao.getTodos());//gambs para atualizar table
 				preencherCampos(t);
 			}
 		});
@@ -145,7 +143,7 @@ public class TelaClienteImpl extends TelaClienteBase {
 			this.clienteselecionado.setId(lgid);
 			this.clienteselecionado.setNome(strNome);
 
-			// dao.atualiza(lgid, this.produtoselecionado);
+			 dao.atualiza(lgid, this.clienteselecionado);
 			// lblTotal.setText(dao.somaValor());
 			// this.modelo.preencherResultado(dao.getTodos());//tive que fazer
 			// essa bambis para atualizar

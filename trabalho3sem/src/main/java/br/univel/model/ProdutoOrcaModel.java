@@ -26,8 +26,6 @@ public class ProdutoOrcaModel extends AbstractTableModel{
 
 	public void preencherResultado(List<Produto> resultado) {
 		this.lista = resultado;
-
-		// O comando abaixo solicita atualização da visão.
 		fireTableDataChanged();
 	}
 
