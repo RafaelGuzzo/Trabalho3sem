@@ -14,6 +14,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.function.Consumer;
 
+import javax.swing.JOptionPane;
+
 import br.univel.banco.ClienteDao;
 import br.univel.banco.ProdutoDao;
 import br.univel.controle.GlassPaneController;
@@ -23,7 +25,7 @@ import br.univel.model.ProdutoOrcaModel;
 import br.univel.pojo.Cliente;
 import br.univel.pojo.Orcamento;
 import br.univel.pojo.Produto;
-import br.univel.reports.GerarRelatorio2;
+import br.univel.reports.GerarRelatorio;
 import br.univel.telasbase.TelaOrcamentoBase;
 
 public class TelaOrcamentoImpl extends TelaOrcamentoBase {
@@ -132,21 +134,11 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 			}
 		});
 
-		super.btnPdf.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				pdf();
-			}
-		});
-
 	}
 
-	protected void pdf() {
-		GerarRelatorio2 gr2 = new GerarRelatorio2();
-		System.out.println(orcamentoselecionado.getCliente().getNome());
-		gr2.gerar(orcamentoselecionado, orcamentoselecionado.getProdutos());
-		System.out.println(orcamentoselecionado.getCliente().getNome());
+	protected void pdf(Orcamento orc) {
+		GerarRelatorio gr2 = new GerarRelatorio();
+		gr2.gerar(orc);
 
 	}
 
@@ -296,7 +288,9 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 		String dataAtual = formato.format(new Date());
 
 		long lgid = Long.parseLong(strId);
-
+		
+		int opcPDF = JOptionPane.showConfirmDialog(null, "Imprimir PDF?");
+		
 		if (orcamentoselecionado == null) {
 			Orcamento o = new Orcamento();
 			o.setId(lgid);
@@ -309,9 +303,11 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 			this.modeloOrcamento.adicionar(o);
 			listaOrcamento.add(o);
 			// dao.adicionar(p);
-
+			if(opcPDF == 0){
+				pdf(o);
+			}
 			novo();// vai limpa tudo e espera um novo orcamento
-
+			
 		} else {
 			// this.clienteselecionado = orcamentoselecionado.getCliente();
 			// this.listaproduto = orcamentoselecionado.getProdutos();
@@ -325,7 +321,9 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 
 			listaOrcamento.add(orcamentoselecionado);
 			this.modeloOrcamento.fireTableDataChanged();
-
+			if(opcPDF == 0){
+				pdf(orcamentoselecionado);
+			}
 			novo();// vai limpa tudo e espera um novo orcamento
 
 		}

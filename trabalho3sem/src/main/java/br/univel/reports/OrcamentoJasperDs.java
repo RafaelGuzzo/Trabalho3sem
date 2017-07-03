@@ -10,40 +10,38 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRField;
 
 public class OrcamentoJasperDs implements JRDataSource {
-	private Iterator<Orcamento> iterator;
-	private Orcamento selecionado;
-	private List<Produto> lista1 = selecionado.getProdutos();
+	private Iterator<Produto> iterator;
+	private Produto selecionado;
+	private Orcamento orc;
 	
-	public OrcamentoJasperDs(List<Orcamento> lista) {
+	public OrcamentoJasperDs(Orcamento orc, List<Produto> lista) {
 		this.iterator = lista.iterator();
-		for (Produto p : lista1) {
-			System.out.println(p.getDescricao());
-		}
+		this.orc = orc;
 	}
 
 	@Override
 	public Object getFieldValue(JRField field) throws JRException {
 		if ("Cliente".equals(field.getName())) {
-			return selecionado.getCliente();
+			return orc.getCliente().getNome();
 		}
 		if ("Validade".equals(field.getName())) {
-			return selecionado.getDataValidade();
+			return orc.getDataValidade();
 		}
 		if ("Id".equals(field.getName())) {
-			return selecionado.getId();
-		}/*
-		if ("apelido".equals(field.getName())) {
-			return selecionado.getApelido();
+			return orc.getId();
 		}
-		if ("cor".equals(field.getName())) {
-			return selecionado.getCor();
+		if ("Produto".equals(field.getName())) {
+			return selecionado.getDescricao();
 		}
-		if ("raca".equals(field.getName())) {
-			return selecionado.getRaca();
+		if ("Valor".equals(field.getName())) {
+			return selecionado.getPreco();
 		}
-		if ("peso".equals(field.getName())) {
-			return selecionado.getPeso();
-		}*/
+		if ("Quantidade".equals(field.getName())) {
+			return selecionado.getQuantidade();
+		}
+		if ("Total".equals(field.getName())) {
+			return orc.getValorTotal();
+		}
 		return null;
 		
 	}
@@ -60,3 +58,4 @@ public class OrcamentoJasperDs implements JRDataSource {
 	
 
 }
+

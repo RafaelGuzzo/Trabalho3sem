@@ -19,7 +19,6 @@ import java.awt.event.ActionListener;
 public class PainelWrapper extends JPanel {
 	private JButton btnX;
 	private JLabel lblTitulo;
-	public JButton btnPdf;
 
 	/**
 	 * Create the panel.
@@ -46,13 +45,6 @@ public class PainelWrapper extends JPanel {
 		gbc_lblTitulo.gridy = 0;
 		panel.add(lblTitulo, gbc_lblTitulo);
 
-		btnPdf = new JButton("PDF");
-		GridBagConstraints gbc_btnPdf = new GridBagConstraints();
-		gbc_btnPdf.insets = new Insets(0, 0, 0, 5);
-		gbc_btnPdf.gridx = 1;
-		gbc_btnPdf.gridy = 0;
-		panel.add(btnPdf, gbc_btnPdf);
-
 		btnX = new JButton("X");
 		GridBagConstraints gbc_btnX = new GridBagConstraints();
 		gbc_btnX.gridx = 2;
@@ -66,10 +58,6 @@ public class PainelWrapper extends JPanel {
 
 	public void setAcaoFechar(ActionListener action) {
 		this.btnX.addActionListener(action);
-	}
-
-	public void setAcaoPdf(ActionListener action2) {
-		this.btnPdf.addActionListener(action2);
 	}
 
 	public void setConteudo(JPanel painel) {

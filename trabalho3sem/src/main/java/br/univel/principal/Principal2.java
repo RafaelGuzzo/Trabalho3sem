@@ -27,7 +27,7 @@ import javax.swing.JTabbedPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Principal2 extends JFrame implements GlassPaneController{
+public class Principal2 extends JFrame implements GlassPaneController {
 
 	private JPanel contentPane;
 	private JTabbedPane tabbedPane;
@@ -61,16 +61,16 @@ public class Principal2 extends JFrame implements GlassPaneController{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0};
-		gbl_panel.columnWeights = new double[]{1.0, 0.0, 1.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		gbl_panel.columnWidths = new int[] { 0, 0, 0, 0 };
+		gbl_panel.rowHeights = new int[] { 0, 0 };
+		gbl_panel.columnWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
-		
+
 		JButton btnOramentos = new JButton("Orçamentos");
 		btnOramentos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -83,7 +83,7 @@ public class Principal2 extends JFrame implements GlassPaneController{
 		gbc_btnOramentos.gridx = 0;
 		gbc_btnOramentos.gridy = 0;
 		panel.add(btnOramentos, gbc_btnOramentos);
-		
+
 		JButton btnClientes = new JButton("Clientes");
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,7 +95,7 @@ public class Principal2 extends JFrame implements GlassPaneController{
 		gbc_btnClientes.gridx = 1;
 		gbc_btnClientes.gridy = 0;
 		panel.add(btnClientes, gbc_btnClientes);
-		
+
 		JButton btnProdutos = new JButton("Produtos");
 		btnProdutos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -107,11 +107,11 @@ public class Principal2 extends JFrame implements GlassPaneController{
 		gbc_btnProdutos.gridx = 2;
 		gbc_btnProdutos.gridy = 0;
 		panel.add(btnProdutos, gbc_btnProdutos);
-		
+
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 	}
-	
+
 	private void inicaLista() {
 		LeitorProdutoUrl leitor = new LeitorProdutoUrl();
 		try {
@@ -120,11 +120,11 @@ public class Principal2 extends JFrame implements GlassPaneController{
 			e.printStackTrace();
 		}
 	}
+
 	protected void addProduto() {
-		TelaProdutoImpl  produto = new TelaProdutoImpl();
+		TelaProdutoImpl produto = new TelaProdutoImpl();
 		PainelWrapper wrapper = new PainelWrapper();
 		wrapper.setConteudo(produto);
-		wrapper.btnPdf.setEnabled(false);
 
 		wrapper.setTitulo("Cadastro de Produtos");
 
@@ -139,10 +139,10 @@ public class Principal2 extends JFrame implements GlassPaneController{
 	}
 
 	protected void addAbaCliente() {
-		TelaClienteImpl  cliente = new TelaClienteImpl();
+		TelaClienteImpl cliente = new TelaClienteImpl();
 		PainelWrapper wrapper = new PainelWrapper();
 		wrapper.setConteudo(cliente);
-		wrapper.btnPdf.setEnabled(false);
+
 		wrapper.setTitulo("Cadastro de Clientes");
 
 		wrapper.setAcaoFechar(new ActionListener() {
@@ -153,11 +153,11 @@ public class Principal2 extends JFrame implements GlassPaneController{
 			}
 		});
 		tabbedPane.add("Clientes", wrapper);
-		
+
 	}
 
 	protected void addAbaOrcamento() {
-		TelaOrcamentoImpl  orcamento = new TelaOrcamentoImpl();
+		TelaOrcamentoImpl orcamento = new TelaOrcamentoImpl();
 		PainelWrapper wrapper = new PainelWrapper();
 		wrapper.setConteudo(orcamento);
 
@@ -171,9 +171,9 @@ public class Principal2 extends JFrame implements GlassPaneController{
 			}
 		});
 		tabbedPane.add("Orçamentos", wrapper);
-		
+
 	}
-	
+
 	@Override
 	public void setGlassPane(JComponent comp) {
 		super.setGlassPane(comp);

@@ -30,7 +30,6 @@ public class TelaOrcamentoBase extends JPanel {
 	protected JTextField txfQtd;
 	protected JButton btnGravar;
 	protected JButton btnRemover;
-	protected JButton btnPdf;
 
 	/**
 	 * Create the panel.
@@ -160,9 +159,9 @@ public class TelaOrcamentoBase extends JPanel {
 		gbc_panel_1.gridy = 1;
 		add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_panel_1.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gbl_panel_1.rowHeights = new int[]{0, 0};
-		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_panel_1.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel_1.setLayout(gbl_panel_1);
 		
@@ -204,16 +203,9 @@ public class TelaOrcamentoBase extends JPanel {
 		
 		btnSalvar = new JButton("Salvar");
 		GridBagConstraints gbc_btnSalvar = new GridBagConstraints();
-		gbc_btnSalvar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnSalvar.gridx = 5;
 		gbc_btnSalvar.gridy = 0;
 		panel_1.add(btnSalvar, gbc_btnSalvar);
-		
-		btnPdf = new JButton("PDF");
-		GridBagConstraints gbc_btnPdf = new GridBagConstraints();
-		gbc_btnPdf.gridx = 6;
-		gbc_btnPdf.gridy = 0;
-		panel_1.add(btnPdf, gbc_btnPdf);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
