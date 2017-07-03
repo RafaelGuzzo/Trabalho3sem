@@ -91,7 +91,7 @@ public class ProdutoDao {
 	}
 
 	public boolean verifica(long id) {
-		String sql = "SELECT id FROM PRODUTO WHERE id ="+id;
+		String sql = "SELECT id FROM produto WHERE id ="+id;
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(sql);

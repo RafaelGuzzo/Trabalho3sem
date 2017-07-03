@@ -69,7 +69,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 	private void configuraTabela() {
 		this.modeloOrcamento = new OrcamentoModel();
 		super.tableorcamento.setModel(modeloOrcamento);
-		
+
 		super.tableorcamento.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -230,20 +230,48 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 	}
 
 	protected void gravar() {
-		String strQtd = super.txfQtd.getText().trim();
-		int qtd = Integer.parseInt(strQtd);
+		
+		if (verificaFilds()) {
+			String strQtd = super.txfQtd.getText().trim();
+			int qtd = Integer.parseInt(strQtd);
 
-		if (produtoselecionado != null) {
-			Produto p = new Produto();
-			p.setId(produtoselecionado.getId());
-			p.setDescricao(produtoselecionado.getDescricao());
-			p.setPreco(produtoselecionado.getPreco());
-			p.setQuantidade(qtd);
+			if (produtoselecionado != null) {
+				Produto p = new Produto();
+				p.setId(produtoselecionado.getId());
+				p.setDescricao(produtoselecionado.getDescricao());
+				p.setPreco(produtoselecionado.getPreco());
+				p.setQuantidade(qtd);
 
-			listaproduto.add(p);
-			alteraModeloTabel(listaproduto);
+				listaproduto.add(p);
+				alteraModeloTabel(listaproduto);
+			}
+			limparCamposProduto();
+			
 		}
-		limparCamposProduto();
+
+	}
+
+	protected boolean verificaFilds() {
+		String strId = super.txfIdOrca.getText().trim();
+		String dataval = super.txfDataVal.getText().trim();
+
+		if (clienteselecionado != null) {
+			if (daoCliente.verifica(clienteselecionado.getId())) {
+				JOptionPane.showMessageDialog(null, "Cliente nao Cadastrado!");
+				return false;
+			}
+		} else if (clienteselecionado == null) {
+			JOptionPane.showMessageDialog(null, "Campo Cliente vazio!");
+			return false;
+		}  else if (strId.equals("")) {
+			JOptionPane.showMessageDialog(null, "Campo ID vazio!");
+			return false;
+		} else if (dataval.equals("")) {
+			JOptionPane.showMessageDialog(null, "Campo Validade vazio!");
+			return false;
+		}
+
+		return true;
 	}
 
 	protected void remover() {
@@ -288,9 +316,9 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 		String dataAtual = formato.format(new Date());
 
 		long lgid = Long.parseLong(strId);
-		
+
 		int opcPDF = JOptionPane.showConfirmDialog(null, "Imprimir PDF?");
-		
+
 		if (orcamentoselecionado == null) {
 			Orcamento o = new Orcamento();
 			o.setId(lgid);
@@ -303,11 +331,11 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 			this.modeloOrcamento.adicionar(o);
 			listaOrcamento.add(o);
 			// dao.adicionar(p);
-			if(opcPDF == 0){
+			if (opcPDF == 0) {
 				pdf(o);
 			}
 			novo();// vai limpa tudo e espera um novo orcamento
-			
+
 		} else {
 			// this.clienteselecionado = orcamentoselecionado.getCliente();
 			// this.listaproduto = orcamentoselecionado.getProdutos();
@@ -321,7 +349,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 
 			listaOrcamento.add(orcamentoselecionado);
 			this.modeloOrcamento.fireTableDataChanged();
-			if(opcPDF == 0){
+			if (opcPDF == 0) {
 				pdf(orcamentoselecionado);
 			}
 			novo();// vai limpa tudo e espera um novo orcamento

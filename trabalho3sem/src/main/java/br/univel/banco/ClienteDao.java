@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.univel.pojo.Cliente;
 
 public class ClienteDao {
@@ -21,7 +23,7 @@ public class ClienteDao {
 				Cliente c = new Cliente();
 				c.setId(rs.getLong(1));
 				c.setNome(rs.getString(2));
-				
+
 				lista.add(c);
 			}
 
@@ -41,7 +43,7 @@ public class ClienteDao {
 				Cliente c = new Cliente();
 				c.setId(rs.getLong(1));
 				c.setNome(rs.getString(2));
-				
+
 				_lista.add(c);
 			}
 		} catch (SQLException e) {
@@ -55,15 +57,17 @@ public class ClienteDao {
 	public void adicionar(Cliente c) {
 		String sql = "INSERT INTO cliente  (id, nome) VALUES (?,?)";
 		PreparedStatement ps;
+		
+		if (!verifica(c.getId())) {
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setLong(1, c.getId());
+				ps.setString(2, c.getNome());
+				ps.executeUpdate();
 
-		try {
-			ps = con.prepareStatement(sql);
-			ps.setLong(1, c.getId());
-			ps.setString(2, c.getNome());
-			ps.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -83,6 +87,24 @@ public class ClienteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public boolean verifica(long id) {
+		String sql = "SELECT id FROM cliente WHERE id =" + id;
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next())
+				return true;
+			else
+				return false;
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Cliente não cadastrado no Banco!");
+		}
+		throw new RuntimeException("ooooooooooooooo");
 	}
 
 	public void exclui(long id) {
