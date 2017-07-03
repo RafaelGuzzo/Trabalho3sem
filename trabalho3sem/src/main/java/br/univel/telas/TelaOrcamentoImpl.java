@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 	private List<Produto> listaproduto = new ArrayList<>();
 	private ClienteDao daoCliente = new ClienteDao();
 	private ProdutoDao daoProduto = new ProdutoDao();
+	private BigDecimal total = new BigDecimal(0);
 
 	public TelaOrcamentoImpl() {
 		super();
@@ -184,9 +186,6 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 			@Override
 			public void accept(Cliente c) {
 				telabusca.setVisible(false);
-				// dao.adicionar(t);
-				// modelo.preencherResultado(dao.getTodos());//gambs para
-				// atualizar table
 				clienteselecionado = c;
 				txfClienteOrca.setText(c.getNome());
 			}
@@ -234,16 +233,20 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 		if (verificaFilds()) {
 			String strQtd = super.txfQtd.getText().trim();
 			int qtd = Integer.parseInt(strQtd);
-
+			BigDecimal qntB = new BigDecimal(qtd);
+			
 			if (produtoselecionado != null) {
 				Produto p = new Produto();
 				p.setId(produtoselecionado.getId());
 				p.setDescricao(produtoselecionado.getDescricao());
 				p.setPreco(produtoselecionado.getPreco());
 				p.setQuantidade(qtd);
-
+				
 				listaproduto.add(p);
+				total = total.add(p.getPreco().multiply(qntB));
+				super.lblvalortotal.setText(String.valueOf(total));
 				alteraModeloTabel(listaproduto);
+				
 			}
 			limparCamposProduto();
 			
@@ -254,19 +257,22 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 	protected boolean verificaFilds() {
 		String strId = super.txfIdOrca.getText().trim();
 		String dataval = super.txfDataVal.getText().trim();
-
+		
 		if (clienteselecionado != null) {
-			if (daoCliente.verifica(clienteselecionado.getId())) {
-				JOptionPane.showMessageDialog(null, "Cliente nao Cadastrado!");
+			if (!daoCliente.verifica(clienteselecionado.getId())) {
+				JOptionPane.showMessageDialog(null, "Cliente nao cadastrado no banco!");
 				return false;
 			}
-		} else if (clienteselecionado == null) {
+		}
+		if (clienteselecionado == null) {
 			JOptionPane.showMessageDialog(null, "Campo Cliente vazio!");
 			return false;
-		}  else if (strId.equals("")) {
+		}
+		if (strId.equals("")) {
 			JOptionPane.showMessageDialog(null, "Campo ID vazio!");
 			return false;
-		} else if (dataval.equals("")) {
+		}
+		if (dataval.equals("")) {
 			JOptionPane.showMessageDialog(null, "Campo Validade vazio!");
 			return false;
 		}
@@ -370,6 +376,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 	private void limparCamposProduto() {
 		super.txfProduto.setText("");
 		super.txfQtd.setText("1");
+		this.produtoselecionado = null;
 		super.txfClienteOrca.setEnabled(false);
 		super.txfDataVal.setEnabled(false);
 		super.txfIdOrca.setEnabled(false);

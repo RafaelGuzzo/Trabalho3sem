@@ -30,6 +30,7 @@ public class TelaOrcamentoBase extends JPanel {
 	protected JTextField txfQtd;
 	protected JButton btnGravar;
 	protected JButton btnRemover;
+	protected JLabel lblvalortotal;
 
 	/**
 	 * Create the panel.
@@ -37,15 +38,16 @@ public class TelaOrcamentoBase extends JPanel {
 	public TelaOrcamentoBase() {
 		setBorder(new TitledBorder(null, "Or\u00E7amento", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0};
+		gridBagLayout.columnWidths = new int[]{0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{1.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.gridwidth = 2;
+		gbc_panel.insets = new Insets(0, 0, 5, 5);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 0;
@@ -153,7 +155,8 @@ public class TelaOrcamentoBase extends JPanel {
 		
 		JPanel panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
-		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
+		gbc_panel_1.gridwidth = 2;
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 0;
 		gbc_panel_1.gridy = 1;
@@ -209,7 +212,8 @@ public class TelaOrcamentoBase extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 0);
+		gbc_scrollPane.gridwidth = 2;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 2;
@@ -218,12 +222,20 @@ public class TelaOrcamentoBase extends JPanel {
 		tableorcamento = new JTable();
 		scrollPane.setViewportView(tableorcamento);
 		
-		lblvalor = new JLabel("Total R$:");
+		lblvalor = new JLabel("Total U$:");
 		GridBagConstraints gbc_lblvalor = new GridBagConstraints();
+		gbc_lblvalor.insets = new Insets(0, 0, 0, 5);
 		gbc_lblvalor.anchor = GridBagConstraints.EAST;
 		gbc_lblvalor.gridx = 0;
 		gbc_lblvalor.gridy = 3;
 		add(lblvalor, gbc_lblvalor);
+		
+		lblvalortotal = new JLabel("New label");
+		GridBagConstraints gbc_lblvalortotal = new GridBagConstraints();
+		gbc_lblvalortotal.anchor = GridBagConstraints.WEST;
+		gbc_lblvalortotal.gridx = 1;
+		gbc_lblvalortotal.gridy = 3;
+		add(lblvalortotal, gbc_lblvalortotal);
 
 	}
 
