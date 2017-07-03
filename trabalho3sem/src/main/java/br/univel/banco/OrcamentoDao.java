@@ -6,18 +6,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import br.univel.pojo.Orcamento;
 import br.univel.pojo.Produto;
 
-public class ProdutoDao {
-	private final static String SQL_BUSCA_TODOS = "SELECT * FROM produto";
+public class OrcamentoDao {
+	/*
+	private final static String SQL_BUSCA_TODOS = "SELECT * FROM orcamento";
 	private Connection con = ConexaoDB.getInstance().getConnection();;
 
-	public List<Produto> getTodos() {
-		List<Produto> lista = new ArrayList<>();
+	public List<Orcamento> getTodos() {
+		List<Orcamento> lista = new ArrayList<>();
 		// con = ConexaoDB.getInstance().getConnection();
 		try (PreparedStatement ps = con.prepareStatement(SQL_BUSCA_TODOS); ResultSet rs = ps.executeQuery()) {
 			while (rs.next()) {
-				Produto a = new Produto();
+				
+				Orcamento a = new Orcamento();
 				a.setId(rs.getLong(1));
 				a.setDescricao(rs.getString(2));
 				a.setPreco(rs.getBigDecimal(3));
@@ -91,7 +95,7 @@ public class ProdutoDao {
 	}
 
 	public boolean verifica(long id) {
-		String sql = "SELECT id_produto FROM produto WHERE id_produto ="+id;
+		String sql = "SELECT id_produto FROM produto WHERE id_produto =" + id;
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(sql);
@@ -165,5 +169,5 @@ public class ProdutoDao {
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 }

@@ -43,6 +43,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 
 	public TelaOrcamentoImpl() {
 		super();
+		btnBuscar.setEnabled(false);
 		limparCampos();
 		configuraBotoes();
 		configuraTabela();
@@ -53,7 +54,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 		super.txfClienteOrca.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_F2 || e.getKeyCode() == KeyEvent.VK_ENTER )
+				if (e.getKeyCode() == KeyEvent.VK_F2 || e.getKeyCode() == KeyEvent.VK_ENTER)
 					buscaCliente();
 			}
 		});
@@ -206,50 +207,31 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 	}
 
 	protected void abreBusca() {
-		/*
-		 * GlassPaneController control =
-		 * TelaController.getInstance().getController();
-		 * System.out.println(control); TelaBuscar telabusca = new TelaBuscar();
-		 * 
-		 * telabusca.setOnOk(new Consumer<Produto>() {
-		 * 
-		 * @Override public void accept(Produto t) {
-		 * telabusca.setVisible(false); dao.adicionar(t);
-		 * lblTotal.setText(dao.somaValor());
-		 * modelo.preencherResultado(dao.getTodos());//gambs para atualizar
-		 * table //preencherCampos(t); } });
-		 * 
-		 * telabusca.setOnCancel(new Runnable() {
-		 * 
-		 * @Override public void run() { limparCampos();
-		 * telabusca.setVisible(false); } });
-		 * 
-		 * control.setGlassPane(telabusca); telabusca.setVisible(true);
-		 */
+
 	}
 
 	protected void gravar() {
-		
+
 		if (verificaFilds()) {
 			String strQtd = super.txfQtd.getText().trim();
 			int qtd = Integer.parseInt(strQtd);
-			BigDecimal qntB = new BigDecimal(qtd);
-			
+			BigDecimal qntB = new BigDecimal(strQtd);
+
 			if (produtoselecionado != null) {
 				Produto p = new Produto();
 				p.setId(produtoselecionado.getId());
 				p.setDescricao(produtoselecionado.getDescricao());
 				p.setPreco(produtoselecionado.getPreco());
 				p.setQuantidade(qtd);
-				
+
 				listaproduto.add(p);
 				total = total.add(p.getPreco().multiply(qntB));
 				super.lblvalortotal.setText(String.valueOf(total));
 				alteraModeloTabel(listaproduto);
-				
+
 			}
 			limparCamposProduto();
-			
+
 		}
 
 	}
@@ -257,7 +239,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 	protected boolean verificaFilds() {
 		String strId = super.txfIdOrca.getText().trim();
 		String dataval = super.txfDataVal.getText().trim();
-		
+
 		if (clienteselecionado != null) {
 			if (!daoCliente.verifica(clienteselecionado.getId())) {
 				JOptionPane.showMessageDialog(null, "Cliente nao cadastrado no banco!");
@@ -393,7 +375,7 @@ public class TelaOrcamentoImpl extends TelaOrcamentoBase {
 		super.txfClienteOrca.setText("");
 		super.lblAlerta.setText("");
 		super.lblvalortotal.setText("");
-		
+
 		super.btnExcluir.setEnabled(false);
 		super.txfClienteOrca.setEnabled(true);
 		super.txfDataVal.setEnabled(true);

@@ -55,7 +55,7 @@ public class ClienteDao {
 	}
 
 	public void adicionar(Cliente c) {
-		String sql = "INSERT INTO cliente  (id, nome) VALUES (?,?)";
+		String sql = "INSERT INTO cliente  (id_cliente, nome) VALUES (?,?)";
 		PreparedStatement ps;
 		
 		if (!verifica(c.getId())) {
@@ -73,7 +73,7 @@ public class ClienteDao {
 	}
 
 	public void atualiza(long id, Cliente c) {
-		String sql = "UPDATE cliente SET id = ?, nome = ? WHERE id =" + id + ";";
+		String sql = "UPDATE cliente SET id_cliente = ?, nome = ? WHERE id_cliente =" + id + ";";
 		PreparedStatement ps;
 
 		try {
@@ -81,7 +81,6 @@ public class ClienteDao {
 
 			ps.setLong(1, c.getId());
 			ps.setString(2, c.getNome());
-			System.out.println(ps.toString());
 			ps.executeUpdate();
 
 		} catch (SQLException e) {
@@ -90,7 +89,8 @@ public class ClienteDao {
 	}
 
 	public boolean verifica(long id) {
-		String sql = "SELECT id FROM cliente WHERE id =" + id;
+		String sql = "SELECT id_cliente FROM cliente WHERE id_cliente =" + id;// me retorna apenas o id
+		//SELECT * FROM cliente WHERE id = me retorna um cliente inteiro
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(sql);
@@ -108,7 +108,7 @@ public class ClienteDao {
 	}
 
 	public void exclui(long id) {
-		String sql = "DELETE FROM cliente WHERE id = ?";
+		String sql = "DELETE FROM cliente WHERE id_cliente = ?";
 		PreparedStatement ps;
 
 		try {

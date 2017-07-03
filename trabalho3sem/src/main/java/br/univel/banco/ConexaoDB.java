@@ -11,8 +11,8 @@ public class ConexaoDB {
 	public ConexaoDB() {		
 		try {
 			Class.forName("org.postgresql.Driver");
-			//this.con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/batata", "postgres", "univel");
-			this.con = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
+			this.con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/batata", "postgres", "univel");
+			//this.con = DriverManager.getConnection("jdbc:h2:~/test", "sa", "sa");
 			
 			
 			Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
